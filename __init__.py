@@ -83,7 +83,7 @@ class Attractor(bpy.types.Operator):
     bpy.context.scene.collection.objects.link(objectdata)
 
     polyline = curvedata.splines.new("POLY")
-    polyline.points.add(self.npoints-1)
+    polyline.points.add(self.npoints  -1)
 
     x = self.x
     y = self.y
@@ -105,7 +105,7 @@ class CoulletAttractor(Attractor):
   bl_label = "Coullet Attractor"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("coullet", "a",  0.80)
   b:  get_prop("coullet", "b", -1.10)
@@ -128,7 +128,7 @@ class LorenzAttractor(Attractor):
   bl_label = "Lorenz Attractor"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("lorenz", "a",  10.00)
   b:  get_prop("lorenz", "b",  28.00)
@@ -152,7 +152,7 @@ class RoesslerAttractor(Attractor):
   bl_label = "RoesslerAttractor"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("roessler", "a", 0.2)
   b:  get_prop("roessler", "b", 0.2)
@@ -174,7 +174,7 @@ class AizawaAttractor(Attractor):
   bl_label = "Aizawa Attractor"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c", "d", "e", "f"]
   a:  get_prop("aizawa", "a",  0.95)
   b:  get_prop("aizawa", "b",  0.7 )
@@ -198,7 +198,7 @@ class ActAttractor(Attractor):
   bl_label = "act"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "d", "m"]
   a:  get_prop("act", "a", 1.8)
   b:  get_prop("act", "b", -0.07)
@@ -220,7 +220,7 @@ class ThreeCellsCNNAttractor(Attractor):
   bl_label = "ThreeCellsCNN Attractor"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["p1", "p2", "r", "s"]
   p1:  get_prop("ThreeCellsCNN", "p1", 1.24)
   p2:  get_prop("ThreeCellsCNN", "p2", 1.1)
@@ -246,7 +246,7 @@ class AizawaAttractorDulipcate(Attractor):
   bl_label = "Aizawa"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c", "d", "e", "f"]
   a:  get_prop("Aizawa", "a", 0.95)
   b:  get_prop("Aizawa", "b", 0.7)
@@ -270,7 +270,7 @@ class ArneodoAttractor(Attractor):
   bl_label = "Arneodo"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("Arneodo", "a", -5.5)
   b:  get_prop("Arneodo", "b", 3.5)
@@ -291,7 +291,7 @@ class AnishenkoAstakhovAttractor(Attractor):
   bl_label = "AnishenkoAstakhov"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["m", "n"]
   m:  get_prop("AnishenkoAstakov", "m", 1.2)
   n:  get_prop("AnishenkoAstakov", "n", 0.5)
@@ -312,7 +312,7 @@ class BoualiAttractor(Attractor):
   bl_label = "Bouali"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "g"]
   a:  get_prop("Bouali", "a", 0.2)
   b:  get_prop("Bouali", "b", 0.05)
@@ -334,7 +334,7 @@ class BurkeShawAttractor(Attractor):
   bl_label = "BurkeShaw"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["s", "v"]
   s:  get_prop("BurkeShaw", "s", 10)
   v:  get_prop("BurkeShaw", "v", 4.272)
@@ -356,7 +356,7 @@ class ChenAttractor(Attractor):
   bl_label = "Chen"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("Chen", "a", 35)
   b:  get_prop("Chen", "b", 8/3.0)
@@ -380,7 +380,7 @@ class LotkaVolterraAttractor(Attractor):
   bl_label = "LotkaVolterra"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints(30000)
+  npoints: get_npoints(30000)
   params = ["a", "b", "c"]
   a:  get_prop("LotkaVolterra", "a", 2.9851)
   b:  get_prop("LotkaVolterra", "b", 3.0)
@@ -405,7 +405,7 @@ class MooreSpiegelAttractor(Attractor):
   bl_label = "MooreSpiegel"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("MoreSpiegel", "a", 100.0)
   b:  get_prop("MoreSpiegel", "b", 26.0)
@@ -429,7 +429,7 @@ class RikitakeAttractor(Attractor):
   bl_label = "Rikitake"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("Rikitake", "a", 5.0)
   b:  get_prop("Rikitake", "b", 2.0)
@@ -451,7 +451,7 @@ class RabinovichFabrikantAttractor(Attractor):
   bl_label = "RabinovichFabrikant"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints(25000)
+  npoints: get_npoints(25000)
   params = ["a", "b"]
   a:  get_prop("RabinovichFabrikant", "a", 1.1)
   b:  get_prop("RabinovichFabrikant", "b", 0.87)
@@ -472,7 +472,7 @@ class ThreeLayerAttractor(Attractor):
   bl_label = "ThreeLayer"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints(15000)
+  npoints: get_npoints(15000)
   params = ["a1","a2","a3","c1","c2","c3","d"]
   a1:  get_prop("ThreeLayer", "a1",-4.1)
   a2:  get_prop("ThreeLayer", "a2", 1.2)
@@ -502,7 +502,7 @@ class ChuaAttractor(Attractor):
   bl_label = "Chua"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a","b","c","d","e"]
   a:  get_prop("Chua", "a", 15.6)
   b:  get_prop("Chua", "b", 1.0)
@@ -528,7 +528,7 @@ class ChuaMultiIAttractor(Attractor):
   bl_label = "ChuaMultiI"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints(15000)
+  npoints: get_npoints(15000)
   params = ["alpha","beta","a","b","c"]
   alpha:  get_prop("ChuaMultiI", "alpha", 10.814)
   beta:  get_prop("ChuaMultiI", "beta", 14.0)
@@ -565,7 +565,7 @@ class ChuaMultiIIAttractor(Attractor):
   bl_label = "ChuaMultiII"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints(15000)
+  npoints: get_npoints(15000)
   params = ["alpha","beta","a","b"]
   alpha:  get_prop("ChuaMultiII", "alpha", 10.814)
   beta:  get_prop("ChuaMultiII", "beta", 14.0)
@@ -595,7 +595,7 @@ class ChenLeeAttractor(Attractor):
   bl_label = "ChenLee"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("ChenLee", "a", 5)
   b:  get_prop("ChenLee", "b", -10)
@@ -616,7 +616,7 @@ class FinanceAttractor(Attractor):
   bl_label = "Finance"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("Finance", "a", 0.001)
   b:  get_prop("Finance", "b", 0.2)
@@ -638,7 +638,7 @@ class ChenCelikovskyAttractor(Attractor):
   bl_label = "ChenCelikovsky"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c"]
   a:  get_prop("ChenCelikovsky", "a", 36)
   b:  get_prop("ChenCelikovsky", "b", 3)
@@ -663,7 +663,7 @@ class DadrasAttractor(Attractor):
   bl_label = "Dadras"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["p", "o", "r", "c", "e"]
   p:  get_prop("Dadras", "p", 3)
   o:  get_prop("Dadras", "o", 2.7)
@@ -686,7 +686,7 @@ class DequanLiAttractor(Attractor):
   bl_label = "DequanLi"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints(20000)
+  npoints: get_npoints(20000)
   params = ["a", "b", "d", "e", "p", "g"]
   a:  get_prop("DequanLi", "a", 40)
   b:  get_prop("DequanLi", "b", 11.0/6.0) 
@@ -711,7 +711,7 @@ class YuWangAttractor(Attractor):
   bl_label = "YuWang"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c", "d"]
   a:  get_prop("YuWang", "a", 10.0)
   b:  get_prop("YuWang", "b", 40.0)
@@ -733,7 +733,7 @@ class HadleyAttractor(Attractor):
   bl_label = "Hadley"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "f", "g"]
   a:  get_prop("Hadley", "a", 0.2)
   b:  get_prop("Hadley", "b", 4)
@@ -755,7 +755,7 @@ class HalvorsenAttractor(Attractor):
   bl_label = "Halvorsen"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   param = ["a"]
   a:  get_prop("Halvorsen", "a", 1.4)
   x:  get_prop("Halvorsen", "x", -5)
@@ -774,7 +774,7 @@ class LinzSprottAttractor(Attractor):
   bl_label = "LinzSprott"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   param = []
   x:  get_prop("LinzSprott", "x", 0.1)
   y:  get_prop("LinzSprott", "y", 0.1)
@@ -792,7 +792,7 @@ class LorenzMod1Attractor(Attractor):
   bl_label = "LorenzMod1"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c", "d"]
   a:  get_prop("LorenzMod1", "a", 0.1)
   b:  get_prop("LorenzMod1", "b", 4)
@@ -814,7 +814,7 @@ class LorenzMod2Attractor(Attractor):
   bl_label = "LorenzMod2"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "c", "d"]
   a:  get_prop("LorenzMod2", "a", 0.9)
   b:  get_prop("LorenzMod2", "b", 5)
@@ -836,7 +836,7 @@ class NewtonLeipnikAttractor(Attractor):
   bl_label = "NewtonLeipnik"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("NewtonLeipnik", "a", 0.4)
   b:  get_prop("NewtonLeipnik", "b", 0.175)
@@ -856,7 +856,7 @@ class NoseHooverAttractor(Attractor):
   bl_label = "NoseHoover"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("NoseHoover", "a", 1.5)
   x:  get_prop("NoseHoover", "x", 1)
@@ -875,7 +875,7 @@ class RayleighBenardAttractor(Attractor):
   bl_label = "RayleighBenard"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "r", "b"]
   a:  get_prop("RayleighBenard", "a", 9)
   r:  get_prop("RayleighBenard", "r", 12)
@@ -896,7 +896,7 @@ class RucklidgeAttractor(Attractor):
   bl_label = "Rucklidge"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["k", "a"]
   k:  get_prop("Rucklidge", "k", 2)
   a:  get_prop("Rucklidge", "a", 6.7)
@@ -916,7 +916,7 @@ class WangSunAttractor(Attractor):
   bl_label = "WangSun"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints(30000)
+  npoints: get_npoints(30000)
   params = ["a", "b", "c", "d", "e", "f"]
   a:  get_prop("WangSun", "a", 0.2) 
   b:  get_prop("WangSun", "b", -0.01)
@@ -940,7 +940,7 @@ class NewJerkAttractor(Attractor):
   bl_label = "NewJerk"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["k", "a"]
   a:  get_prop("NewJerk", "a", 0.00000001)
   b:  get_prop("NewJerk", "b", 0.026)
@@ -960,7 +960,7 @@ class SakaryaAttractor(Attractor):
   bl_label = "Sakarya"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("Sakarya", "a", 0.4)
   b:  get_prop("Sakarya", "b", 0.3)
@@ -980,7 +980,7 @@ class Duffing(Attractor):
   bl_label = "Duffing"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "w"]
   a:  get_prop("Duffing", "a", 0.25)
   b:  get_prop("Duffing", "b", 0.3)
@@ -1003,7 +1003,7 @@ class ShimizuMoriokaAttractor(Attractor):
   bl_label = "ShimizuMorioka"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("ShimizuMorioka", "a", 0.75)
   b:  get_prop("ShimizuMorioka", "b", 0.45)
@@ -1023,7 +1023,7 @@ class SprottDAttractor(Attractor):
   bl_label = "SprottD"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottD", "a", 3)
   x:  get_prop("SprottD", "x", 0.1)
@@ -1042,7 +1042,7 @@ class SprottEAttractor(Attractor):
   bl_label = "SprottE"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottE", "a", 4)
   x:  get_prop("SprottE", "x", 1)
@@ -1061,7 +1061,7 @@ class SprottLinzBAttractor(Attractor):
   bl_label = "SprottLinzB"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   param = []
   x:  get_prop("SprottLinzB", "x", 1)
   y:  get_prop("SprottLinzB", "y", 0.0)
@@ -1079,7 +1079,7 @@ class SprottLinzCAttractor(Attractor):
   bl_label = "SprottLinzC"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   param = []
   x:  get_prop("SprottLinzC", "x", 1)
   y:  get_prop("SprottLinzC", "y", 0.0)
@@ -1097,7 +1097,7 @@ class SprottLinzFAttractor(Attractor):
   bl_label = "SprottLinzF"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzF", "a", 0.5)
   x:  get_prop("SprottLinzF", "x", 0.1)
@@ -1116,7 +1116,7 @@ class SprottLinzGAttractor(Attractor):
   bl_label = "SprottLinzG"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzG", "a", 0.4)
   x:  get_prop("SprottLinzG", "x", 1)
@@ -1135,7 +1135,7 @@ class SprottLinzHAttractor(Attractor):
   bl_label = "SprottLinzH"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzH", "a", 0.5)
   x:  get_prop("SprottLinzH", "x", 1)
@@ -1154,7 +1154,7 @@ class SprottLinzIAttractor(Attractor):
   bl_label = "SprottLinzI"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzI", "a", -0.2)
   x:  get_prop("SprottLinzI", "x", 0.1)
@@ -1173,7 +1173,7 @@ class SprottLinzJAttractor(Attractor):
   bl_label = "SprottLinzJ"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzJ", "a", 2)
   x:  get_prop("SprottLinzJ", "x", 0.1)
@@ -1192,7 +1192,7 @@ class SprottLinzKAttractor(Attractor):
   bl_label = "SprottLinzK"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzK", "a", 0.3)
   x:  get_prop("SprottLinzK", "x", 0.1)
@@ -1211,7 +1211,7 @@ class SprottLinzLAttractor(Attractor):
   bl_label = "SprottLinzL"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("SprottLinzL", "a", 3.9)
   b:  get_prop("SprottLinzL", "b", 0.9)
@@ -1231,7 +1231,7 @@ class SprottLinzMAttractor(Attractor):
   bl_label = "SprottLinzM"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzM", "a", 1.7)
   x:  get_prop("SprottLinzM", "x", 0.1)
@@ -1250,7 +1250,7 @@ class SprottLinzOAttractor(Attractor):
   bl_label = "SprottLinzO"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzO", "a", 2.7)
   x:  get_prop("SprottLinzO", "x", 0.1)
@@ -1269,7 +1269,7 @@ class SprottLinzPAttractor(Attractor):
   bl_label = "SprottLinzP"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzP", "a", 2.7)
   x:  get_prop("SprottLinzP", "x", 0.1)
@@ -1288,7 +1288,7 @@ class SprottLinzQAttractor(Attractor):
   bl_label = "SprottLinzQ"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("SprottLinzQ", "a", 3.1)
   b:  get_prop("SprottLinzQ", "b", 0.5)
@@ -1308,7 +1308,7 @@ class SprottLinzSAttractor(Attractor):
   bl_label = "SprottLinzS"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottLinzS", "a", 4)
   x:  get_prop("SprottLinzS", "x", 0.1)
@@ -1327,7 +1327,7 @@ class SprottNAttractor(Attractor):
   bl_label = "SprottN"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a"]
   a:  get_prop("SprottN", "a", 2)
   x:  get_prop("SprottN", "x", 0.1)
@@ -1346,7 +1346,7 @@ class SprottRAttractor(Attractor):
   bl_label = "SprottR"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b"]
   a:  get_prop("SprottR", "a", 0.9)
   b:  get_prop("SprottR", "b", 0.4)
@@ -1366,7 +1366,7 @@ class StrizhakKawczynskiAttractor(Attractor):
   bl_label = "StrizhakKawczynski"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
+  npoints: get_npoints()
   params = ["a", "b", "b1", "b2", "q", "r", "ax1", "ax2", "ax3"]
   a: get_prop("StrizhakKawczynski", "a", 150)
   b: get_prop("StrizhakKawczynski", "b", 436.6)
