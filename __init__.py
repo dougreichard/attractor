@@ -24,7 +24,7 @@ from bpy.props import IntProperty
 
 bl_info = {
   "author": "mike.tyka@gmail.com",
-  "blender": (2, 6, 0),
+  "blender": (2, 80, 0),
   "category": "Add Curve",
   "description": "Creates a strange attractor curve",
   "location": "View3D > Add > Curve > Attractors",
@@ -79,7 +79,8 @@ class Attractor(bpy.types.Operator):
 
     objectdata = bpy.data.objects.new("ObjCurve", curvedata)
     objectdata.location = (0,0,0) 
-    bpy.context.scene.objects.link(objectdata)
+    # bpy.context.scene.objects.link(objectdata)
+    bpy.context.scene.collection.objects.link(objectdata)
 
     polyline = curvedata.splines.new("POLY")
     polyline.points.add(self.npoints-1)
@@ -106,15 +107,15 @@ class CoulletAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("coullet", "a",  0.80)
-  b = get_prop("coullet", "b", -1.10)
-  c = get_prop("coullet", "c", -0.45)
-  d = get_prop("coullet", "d", -1.00)
+  a:  get_prop("coullet", "a",  0.80)
+  b:  get_prop("coullet", "b", -1.10)
+  c:  get_prop("coullet", "c", -0.45)
+  d:  get_prop("coullet", "d", -1.00)
 
-  x = get_prop("coullet", "x",   0.10)
-  y = get_prop("coullet", "y",   0.00)
-  z = get_prop("coullet", "z",   0.00)
-  dt = get_prop("coullet", "dt", 0.01)
+  x:  get_prop("coullet", "x",   0.10)
+  y:  get_prop("coullet", "y",   0.00)
+  z:  get_prop("coullet", "z",   0.00)
+  dt:  get_prop("coullet", "dt", 0.01)
 
   def iterate(self, x, y, z):
     dx = y 
@@ -129,14 +130,14 @@ class LorenzAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("lorenz", "a",  10.00)
-  b = get_prop("lorenz", "b",  28.00)
-  c = get_prop("lorenz", "c",  (8/3))
+  a:  get_prop("lorenz", "a",  10.00)
+  b:  get_prop("lorenz", "b",  28.00)
+  c:  get_prop("lorenz", "c",  (8/3))
 
-  x = get_prop("lorenz", "x",   0.10)
-  y = get_prop("lorenz", "y",   0.00)
-  z = get_prop("lorenz", "z",   0.00)
-  dt = get_prop("lorenz", "dt", 0.01)
+  x:  get_prop("lorenz", "x",   0.10)
+  y:  get_prop("lorenz", "y",   0.00)
+  z:  get_prop("lorenz", "z",   0.00)
+  dt:  get_prop("lorenz", "dt", 0.01)
 
   def iterate(self, x, y, z):
     dx = self.a * (y - x)
@@ -153,14 +154,14 @@ class RoesslerAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("roessler", "a", 0.2)
-  b = get_prop("roessler", "b", 0.2)
-  c = get_prop("roessler", "c", 5.7)
+  a:  get_prop("roessler", "a", 0.2)
+  b:  get_prop("roessler", "b", 0.2)
+  c:  get_prop("roessler", "c", 5.7)
 
-  x = get_prop("roessler", "x",   1.00)
-  y = get_prop("roessler", "y",   1.00)
-  z = get_prop("roessler", "z",   1.00)
-  dt = get_prop("roessler", "dt", 0.01)
+  x:  get_prop("roessler", "x",   1.00)
+  y:  get_prop("roessler", "y",   1.00)
+  z:  get_prop("roessler", "z",   1.00)
+  dt:  get_prop("roessler", "dt", 0.01)
 
   def iterate(self, x, y, z):
     dx=-(y+z);
@@ -175,16 +176,16 @@ class AizawaAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c", "d", "e", "f"]
-  a = get_prop("aizawa", "a",  0.95)
-  b = get_prop("aizawa", "b",  0.7 )
-  c = get_prop("aizawa", "c",  0.6 )
-  d = get_prop("aizawa", "d",  3.5 )
-  e = get_prop("aizawa", "e",  0.25)
-  f = get_prop("aizawa", "f",  0.1 )
-  x = get_prop("aizawa", "x",  0.1 )
-  y = get_prop("aizawa", "y",  0.00)
-  z = get_prop("aizawa", "z",  0.00)
-  dt = get_prop("aizawa", "dt", 0.01)
+  a:  get_prop("aizawa", "a",  0.95)
+  b:  get_prop("aizawa", "b",  0.7 )
+  c:  get_prop("aizawa", "c",  0.6 )
+  d:  get_prop("aizawa", "d",  3.5 )
+  e:  get_prop("aizawa", "e",  0.25)
+  f:  get_prop("aizawa", "f",  0.1 )
+  x:  get_prop("aizawa", "x",  0.1 )
+  y:  get_prop("aizawa", "y",  0.00)
+  z:  get_prop("aizawa", "z",  0.00)
+  dt:  get_prop("aizawa", "dt", 0.01)
 
   def iterate(self, x, y, z):
     dx = (z-self.b)*x-self.d*y
@@ -199,14 +200,14 @@ class ActAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "d", "m"]
-  a = get_prop("act", "a", 1.8)
-  b = get_prop("act", "b", -0.07)
-  d = get_prop("act", "d", 1.5)
-  m = get_prop("act", "m", 0.02)
-  x = get_prop("act", "x", 0.5)
-  y = get_prop("act", "y", 0.0)
-  z = get_prop("act", "z", 0.0)
-  dt = get_prop("act", "dt", 0.02)
+  a:  get_prop("act", "a", 1.8)
+  b:  get_prop("act", "b", -0.07)
+  d:  get_prop("act", "d", 1.5)
+  m:  get_prop("act", "m", 0.02)
+  x:  get_prop("act", "x", 0.5)
+  y:  get_prop("act", "y", 0.0)
+  z:  get_prop("act", "z", 0.0)
+  dt:  get_prop("act", "dt", 0.02)
 
   def iterate(self, x, y, z):
     xn = self.a*(x-y)
@@ -221,15 +222,15 @@ class ThreeCellsCNNAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["p1", "p2", "r", "s"]
-  p1 = get_prop("ThreeCellsCNN", "p1", 1.24)
-  p2 = get_prop("ThreeCellsCNN", "p2", 1.1)
-  r = get_prop("ThreeCellsCNN", "r", 4.4)
-  s = get_prop("ThreeCellsCNN", "s", 3.21)
+  p1:  get_prop("ThreeCellsCNN", "p1", 1.24)
+  p2:  get_prop("ThreeCellsCNN", "p2", 1.1)
+  r:  get_prop("ThreeCellsCNN", "r", 4.4)
+  s:  get_prop("ThreeCellsCNN", "s", 3.21)
 
-  x = get_prop("ThreeCellsCNN", "x", 0.1)
-  y = get_prop("ThreeCellsCNN", "y", 0.1)
-  z = get_prop("ThreeCellsCNN", "z", 0.1)
-  dt = get_prop("ThreeCellsCNN", "dt", 0.01)
+  x:  get_prop("ThreeCellsCNN", "x", 0.1)
+  y:  get_prop("ThreeCellsCNN", "y", 0.1)
+  z:  get_prop("ThreeCellsCNN", "z", 0.1)
+  dt:  get_prop("ThreeCellsCNN", "dt", 0.01)
 
   def iterate(self, x, y, z):
     h1 = 0.5*(abs(x+1)-abs(x-1))
@@ -240,23 +241,23 @@ class ThreeCellsCNNAttractor(Attractor):
     zn = -z-self.s*h1+self.r*h2+h3
     return xn, yn, zn
 
-class AizawaAttractor(Attractor):
+class AizawaAttractorDulipcate(Attractor):
   bl_idname = "curve.aizawa_attractor_add"
   bl_label = "Aizawa"
   bl_options = {"REGISTER", "UNDO"}
 
   npoints = get_npoints()
   params = ["a", "b", "c", "d", "e", "f"]
-  a = get_prop("Aizawa", "a", 0.95)
-  b = get_prop("Aizawa", "b", 0.7)
-  c = get_prop("Aizawa", "c", 0.6)
-  d = get_prop("Aizawa", "d", 3.5)
-  e = get_prop("Aizawa", "e", 0.25)
-  f = get_prop("Aizawa", "f", 0.1)
-  x = get_prop("Aizawa", "x", 0.1)
-  y = get_prop("Aizawa", "y", 0.0)
-  z = get_prop("Aizawa", "z", 0.0)
-  dt = get_prop("Aizawa", "dt", 0.01)
+  a:  get_prop("Aizawa", "a", 0.95)
+  b:  get_prop("Aizawa", "b", 0.7)
+  c:  get_prop("Aizawa", "c", 0.6)
+  d:  get_prop("Aizawa", "d", 3.5)
+  e:  get_prop("Aizawa", "e", 0.25)
+  f:  get_prop("Aizawa", "f", 0.1)
+  x:  get_prop("Aizawa", "x", 0.1)
+  y:  get_prop("Aizawa", "y", 0.0)
+  z:  get_prop("Aizawa", "z", 0.0)
+  dt:  get_prop("Aizawa", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = (z-self.b)*x-self.d*y
@@ -271,13 +272,13 @@ class ArneodoAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("Arneodo", "a", -5.5)
-  b = get_prop("Arneodo", "b", 3.5)
-  c = get_prop("Arneodo", "c", -1)
-  x = get_prop("Arneodo", "x", 0.1)
-  y = get_prop("Arneodo", "y", 0.0)
-  z = get_prop("Arneodo", "z", 0.0)
-  dt = get_prop("Arneodo", "dt", 0.009)
+  a:  get_prop("Arneodo", "a", -5.5)
+  b:  get_prop("Arneodo", "b", 3.5)
+  c:  get_prop("Arneodo", "c", -1)
+  x:  get_prop("Arneodo", "x", 0.1)
+  y:  get_prop("Arneodo", "y", 0.0)
+  z:  get_prop("Arneodo", "z", 0.0)
+  dt:  get_prop("Arneodo", "dt", 0.009)
 
   def iterate(self, x, y, z):
     xn = y
@@ -292,12 +293,12 @@ class AnishenkoAstakhovAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["m", "n"]
-  m = get_prop("AnishenkoAstakov", "m", 1.2)
-  n = get_prop("AnishenkoAstakov", "n", 0.5)
-  x = get_prop("AnishenkoAstakov", "x", 1)
-  y = get_prop("AnishenkoAstakov", "y", 0.0)
-  z = get_prop("AnishenkoAstakov", "z", 0.0)
-  dt = get_prop("AnishenkoAstakov", "dt", 0.01)
+  m:  get_prop("AnishenkoAstakov", "m", 1.2)
+  n:  get_prop("AnishenkoAstakov", "n", 0.5)
+  x:  get_prop("AnishenkoAstakov", "x", 1)
+  y:  get_prop("AnishenkoAstakov", "y", 0.0)
+  z:  get_prop("AnishenkoAstakov", "z", 0.0)
+  dt:  get_prop("AnishenkoAstakov", "dt", 0.01)
 
   def iterate(self, x, y, z):
     i = 1.0 if x > 0 else 0.0
@@ -313,14 +314,14 @@ class BoualiAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "g"]
-  a = get_prop("Bouali", "a", 0.2)
-  b = get_prop("Bouali", "b", 0.05)
-  g = get_prop("Bouali", "g", 1.0)
+  a:  get_prop("Bouali", "a", 0.2)
+  b:  get_prop("Bouali", "b", 0.05)
+  g:  get_prop("Bouali", "g", 1.0)
     
-  x = get_prop("Bouali", "x", 1)
-  y = get_prop("Bouali", "y", 0.0)
-  z = get_prop("Bouali", "z", 0.0)
-  dt = get_prop("Bouali", "dt", 0.005)
+  x:  get_prop("Bouali", "x", 1)
+  y:  get_prop("Bouali", "y", 0.0)
+  z:  get_prop("Bouali", "z", 0.0)
+  dt:  get_prop("Bouali", "dt", 0.005)
 
   def iterate(self, x, y, z):
     xn = 0.02*y + 0.4*x*(0.2 - y*y)
@@ -335,12 +336,12 @@ class BurkeShawAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["s", "v"]
-  s = get_prop("BurkeShaw", "s", 10)
-  v = get_prop("BurkeShaw", "v", 4.272)
-  x = get_prop("BurkeShaw", "x", 1)
-  y = get_prop("BurkeShaw", "y", 0.0)
-  z = get_prop("BurkeShaw", "z", 0.0)
-  dt = get_prop("BurkeShaw", "dt", 0.005)
+  s:  get_prop("BurkeShaw", "s", 10)
+  v:  get_prop("BurkeShaw", "v", 4.272)
+  x:  get_prop("BurkeShaw", "x", 1)
+  y:  get_prop("BurkeShaw", "y", 0.0)
+  z:  get_prop("BurkeShaw", "z", 0.0)
+  dt:  get_prop("BurkeShaw", "dt", 0.005)
 
   def iterate(self, x, y, z):
     xn = -self.s*(x+y)
@@ -357,13 +358,13 @@ class ChenAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("Chen", "a", 35)
-  b = get_prop("Chen", "b", 8/3.0)
-  c = get_prop("Chen", "c", 20)
-  x = get_prop("Chen", "x", -3)
-  y = get_prop("Chen", "y", 2)
-  z = get_prop("Chen", "z", 20)
-  dt = get_prop("Chen", "dt", 0.002)
+  a:  get_prop("Chen", "a", 35)
+  b:  get_prop("Chen", "b", 8/3.0)
+  c:  get_prop("Chen", "c", 20)
+  x:  get_prop("Chen", "x", -3)
+  y:  get_prop("Chen", "y", 2)
+  z:  get_prop("Chen", "z", 20)
+  dt:  get_prop("Chen", "dt", 0.002)
 
   def iterate(self, x, y, z):
     xn = self.a*(y-x)
@@ -381,13 +382,13 @@ class LotkaVolterraAttractor(Attractor):
 
   npoints = get_npoints(30000)
   params = ["a", "b", "c"]
-  a = get_prop("LotkaVolterra", "a", 2.9851)
-  b = get_prop("LotkaVolterra", "b", 3.0)
-  c = get_prop("LotkaVolterra", "c", 2)
-  x = get_prop("LotkaVolterra", "x", 1.0)
-  y = get_prop("LotkaVolterra", "y", 1.0)
-  z = get_prop("LotkaVolterra", "z", 1.0)
-  dt = get_prop("LotkaVolterra", "dt", 0.01)
+  a:  get_prop("LotkaVolterra", "a", 2.9851)
+  b:  get_prop("LotkaVolterra", "b", 3.0)
+  c:  get_prop("LotkaVolterra", "c", 2)
+  x:  get_prop("LotkaVolterra", "x", 1.0)
+  y:  get_prop("LotkaVolterra", "y", 1.0)
+  z:  get_prop("LotkaVolterra", "z", 1.0)
+  dt:  get_prop("LotkaVolterra", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = x - x*y + self.c*x*x - self.a*z*x*x
@@ -406,13 +407,13 @@ class MooreSpiegelAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("MoreSpiegel", "a", 100.0)
-  b = get_prop("MoreSpiegel", "b", 26.0)
+  a:  get_prop("MoreSpiegel", "a", 100.0)
+  b:  get_prop("MoreSpiegel", "b", 26.0)
 
-  x = get_prop("MoreSpiegel", "x", 1.0)
-  y = get_prop("MoreSpiegel", "y", 0.0)
-  z = get_prop("MoreSpiegel", "z", 0.0)
-  dt = get_prop("MoreSpiegel", "dt", 0.002)
+  x:  get_prop("MoreSpiegel", "x", 1.0)
+  y:  get_prop("MoreSpiegel", "y", 0.0)
+  z:  get_prop("MoreSpiegel", "z", 0.0)
+  dt:  get_prop("MoreSpiegel", "dt", 0.002)
 
   def iterate(self, x, y, z):
     xn=y
@@ -430,12 +431,12 @@ class RikitakeAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("Rikitake", "a", 5.0)
-  b = get_prop("Rikitake", "b", 2.0)
-  x = get_prop("Rikitake", "x", 1.0)
-  y = get_prop("Rikitake", "y", 1.0)
-  z = get_prop("Rikitake", "z", 1.0)
-  dt = get_prop("Rikitake", "dt", 0.01)
+  a:  get_prop("Rikitake", "a", 5.0)
+  b:  get_prop("Rikitake", "b", 2.0)
+  x:  get_prop("Rikitake", "x", 1.0)
+  y:  get_prop("Rikitake", "y", 1.0)
+  z:  get_prop("Rikitake", "z", 1.0)
+  dt:  get_prop("Rikitake", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn=-self.b*x+z*y
@@ -452,12 +453,12 @@ class RabinovichFabrikantAttractor(Attractor):
 
   npoints = get_npoints(25000)
   params = ["a", "b"]
-  a = get_prop("RabinovichFabrikant", "a", 1.1)
-  b = get_prop("RabinovichFabrikant", "b", 0.87)
-  x = get_prop("RabinovichFabrikant", "x", -1.05)
-  y = get_prop("RabinovichFabrikant", "y", 0.9)
-  z = get_prop("RabinovichFabrikant", "z", 1.01)
-  dt = get_prop("RabinovichFabrikant", "dt", 0.001)
+  a:  get_prop("RabinovichFabrikant", "a", 1.1)
+  b:  get_prop("RabinovichFabrikant", "b", 0.87)
+  x:  get_prop("RabinovichFabrikant", "x", -1.05)
+  y:  get_prop("RabinovichFabrikant", "y", 0.9)
+  z:  get_prop("RabinovichFabrikant", "z", 1.01)
+  dt:  get_prop("RabinovichFabrikant", "dt", 0.001)
 
   def iterate(self, x, y, z):
     xn=y*(z-1.0+x*x)+self.b*x
@@ -473,18 +474,18 @@ class ThreeLayerAttractor(Attractor):
 
   npoints = get_npoints(15000)
   params = ["a1","a2","a3","c1","c2","c3","d"]
-  a1 = get_prop("ThreeLayer", "a1",-4.1)
-  a2 = get_prop("ThreeLayer", "a2", 1.2)
-  a3 = get_prop("ThreeLayer", "a3",13.45)
-  c1 = get_prop("ThreeLayer", "c1", 2.76)
-  c2 = get_prop("ThreeLayer", "c2", 0.6)
-  c3 = get_prop("ThreeLayer", "c3", 13.13)
-  d = get_prop("ThreeLayer", "d", 1.8)
+  a1:  get_prop("ThreeLayer", "a1",-4.1)
+  a2:  get_prop("ThreeLayer", "a2", 1.2)
+  a3:  get_prop("ThreeLayer", "a3",13.45)
+  c1:  get_prop("ThreeLayer", "c1", 2.76)
+  c2:  get_prop("ThreeLayer", "c2", 0.6)
+  c3:  get_prop("ThreeLayer", "c3", 13.13)
+  d:  get_prop("ThreeLayer", "d", 1.8)
 
-  x = get_prop("ThreeLayer", "x", 0.0)
-  y = get_prop("ThreeLayer", "y", -15.0)
-  z = get_prop("ThreeLayer", "z", 0.0)
-  dt = get_prop("ThreeLayer", "dt", 0.04 )
+  x:  get_prop("ThreeLayer", "x", 0.0)
+  y:  get_prop("ThreeLayer", "y", -15.0)
+  z:  get_prop("ThreeLayer", "z", 0.0)
+  dt:  get_prop("ThreeLayer", "dt", 0.04 )
 
   def iterate(self, x, y, z):
     b=((self.d*self.a2*self.a2*self.c3*self.c3)/(32*self.a3*self.a3*self.c2*self.c2))*math.sqrt((-self.a3*self.c2)/(self.a1*self.c1))
@@ -503,16 +504,16 @@ class ChuaAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a","b","c","d","e"]
-  a = get_prop("Chua", "a", 15.6)
-  b = get_prop("Chua", "b", 1.0)
-  c = get_prop("Chua", "c", 25.58)
-  d = get_prop("Chua", "d", -1)
-  e = get_prop("Chua", "e", 0)
+  a:  get_prop("Chua", "a", 15.6)
+  b:  get_prop("Chua", "b", 1.0)
+  c:  get_prop("Chua", "c", 25.58)
+  d:  get_prop("Chua", "d", -1)
+  e:  get_prop("Chua", "e", 0)
 
-  x = get_prop("Chua", "x", 1.0)
-  y = get_prop("Chua", "y", 1.0)
-  z = get_prop("Chua", "z", 1.0)
-  dt = get_prop("Chua", "dt", 0.01)
+  x:  get_prop("Chua", "x", 1.0)
+  y:  get_prop("Chua", "y", 1.0)
+  z:  get_prop("Chua", "z", 1.0)
+  dt:  get_prop("Chua", "dt", 0.01)
 
   def iterate(self, x, y, z):
     h = self.e*x+(self.d+self.e)*(abs(x+1)-abs(x-1));
@@ -529,16 +530,16 @@ class ChuaMultiIAttractor(Attractor):
 
   npoints = get_npoints(15000)
   params = ["alpha","beta","a","b","c"]
-  alpha = get_prop("ChuaMultiI", "alpha", 10.814)
-  beta = get_prop("ChuaMultiI", "beta", 14.0)
-  a = get_prop("ChuaMultiI", "a", 1.3)
-  b = get_prop("ChuaMultiI", "b", 0.11)
+  alpha:  get_prop("ChuaMultiI", "alpha", 10.814)
+  beta:  get_prop("ChuaMultiI", "beta", 14.0)
+  a:  get_prop("ChuaMultiI", "a", 1.3)
+  b:  get_prop("ChuaMultiI", "b", 0.11)
   c = get_int_prop("ChuaMultiI", "c", 2)
 
-  x = get_prop("ChuaMultiI", "x", 1.0)
-  y = get_prop("ChuaMultiI", "y", 0.0)
-  z = get_prop("ChuaMultiI", "z", 0.0)
-  dt = get_prop("ChuaMultiI", "dt", 0.01)
+  x:  get_prop("ChuaMultiI", "x", 1.0)
+  y:  get_prop("ChuaMultiI", "y", 0.0)
+  z:  get_prop("ChuaMultiI", "z", 0.0)
+  dt:  get_prop("ChuaMultiI", "dt", 0.01)
 
   def iterate(self, x, y, z):
     d=0
@@ -566,15 +567,15 @@ class ChuaMultiIIAttractor(Attractor):
 
   npoints = get_npoints(15000)
   params = ["alpha","beta","a","b"]
-  alpha = get_prop("ChuaMultiII", "alpha", 10.814)
-  beta = get_prop("ChuaMultiII", "beta", 14.0)
-  a = get_prop("ChuaMultiII", "a", 1.3)
-  b = get_prop("ChuaMultiII", "b", 0.11)
+  alpha:  get_prop("ChuaMultiII", "alpha", 10.814)
+  beta:  get_prop("ChuaMultiII", "beta", 14.0)
+  a:  get_prop("ChuaMultiII", "a", 1.3)
+  b:  get_prop("ChuaMultiII", "b", 0.11)
 
-  x = get_prop("ChuaMultiII", "x", 1.0)
-  y = get_prop("ChuaMultiII", "y", 0.0)
-  z = get_prop("ChuaMultiII", "z", 0.0)
-  dt = get_prop("ChuaMultiII", "dt", 0.01)
+  x:  get_prop("ChuaMultiII", "x", 1.0)
+  y:  get_prop("ChuaMultiII", "y", 0.0)
+  z:  get_prop("ChuaMultiII", "z", 0.0)
+  dt:  get_prop("ChuaMultiII", "dt", 0.01)
 
   m = [0.9/7.0, -3.0/7.0, 3.5/7.0, -2.7/7.0, 4.0/7.0, -2.4/7.0]
   c = [0.0, 1.0, 2.15, 3.6, 6.2, 9.0]
@@ -596,13 +597,13 @@ class ChenLeeAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("ChenLee", "a", 5)
-  b = get_prop("ChenLee", "b", -10)
-  c = get_prop("ChenLee", "c", -0.38)
-  x = get_prop("ChenLee", "x", 1)
-  y = get_prop("ChenLee", "y", 1)
-  z = get_prop("ChenLee", "z", 1)
-  dt = get_prop("ChenLee", "dt", 0.002)
+  a:  get_prop("ChenLee", "a", 5)
+  b:  get_prop("ChenLee", "b", -10)
+  c:  get_prop("ChenLee", "c", -0.38)
+  x:  get_prop("ChenLee", "x", 1)
+  y:  get_prop("ChenLee", "y", 1)
+  z:  get_prop("ChenLee", "z", 1)
+  dt:  get_prop("ChenLee", "dt", 0.002)
 
   def iterate(self, x, y, z):
     xn = self.a*x - y*z 
@@ -617,13 +618,13 @@ class FinanceAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("Finance", "a", 0.001)
-  b = get_prop("Finance", "b", 0.2)
-  c = get_prop("Finance", "c", 1.1)
-  x = get_prop("Finance", "x", 0.1)
-  y = get_prop("Finance", "y", 0.1)
-  z = get_prop("Finance", "z", 0.1)
-  dt = get_prop("Finance", "dt", 0.002)
+  a:  get_prop("Finance", "a", 0.001)
+  b:  get_prop("Finance", "b", 0.2)
+  c:  get_prop("Finance", "c", 1.1)
+  x:  get_prop("Finance", "x", 0.1)
+  y:  get_prop("Finance", "y", 0.1)
+  z:  get_prop("Finance", "z", 0.1)
+  dt:  get_prop("Finance", "dt", 0.002)
 
   def iterate(self, x, y, z):
     xn = (1/self.b - self.a)*x + x*y + z 
@@ -639,13 +640,13 @@ class ChenCelikovskyAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c"]
-  a = get_prop("ChenCelikovsky", "a", 36)
-  b = get_prop("ChenCelikovsky", "b", 3)
-  c = get_prop("ChenCelikovsky", "c", 20)
-  x = get_prop("ChenCelikovsky", "x", 1)
-  y = get_prop("ChenCelikovsky", "y", 1)
-  z = get_prop("ChenCelikovsky", "z", 1)
-  dt = get_prop("ChenCelikovsky", "dt", 0.002)
+  a:  get_prop("ChenCelikovsky", "a", 36)
+  b:  get_prop("ChenCelikovsky", "b", 3)
+  c:  get_prop("ChenCelikovsky", "c", 20)
+  x:  get_prop("ChenCelikovsky", "x", 1)
+  y:  get_prop("ChenCelikovsky", "y", 1)
+  z:  get_prop("ChenCelikovsky", "z", 1)
+  dt:  get_prop("ChenCelikovsky", "dt", 0.002)
 
   cnt = 0
   t = 0
@@ -664,15 +665,15 @@ class DadrasAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["p", "o", "r", "c", "e"]
-  p = get_prop("Dadras", "p", 3)
-  o = get_prop("Dadras", "o", 2.7)
-  r = get_prop("Dadras", "r", 1.7)
-  c = get_prop("Dadras", "c", 2)
-  e = get_prop("Dadras", "e", 9)
-  x = get_prop("Dadras", "x", 0.1)
-  y = get_prop("Dadras", "y", 0.03)
-  z = get_prop("Dadras", "z", 0.0)
-  dt = get_prop("Dadras", "dt", 0.008)
+  p:  get_prop("Dadras", "p", 3)
+  o:  get_prop("Dadras", "o", 2.7)
+  r:  get_prop("Dadras", "r", 1.7)
+  c:  get_prop("Dadras", "c", 2)
+  e:  get_prop("Dadras", "e", 9)
+  x:  get_prop("Dadras", "x", 0.1)
+  y:  get_prop("Dadras", "y", 0.03)
+  z:  get_prop("Dadras", "z", 0.0)
+  dt:  get_prop("Dadras", "dt", 0.008)
 
   def iterate(self, x, y, z):
     xn = y - self.p*x + self.o*y*z 
@@ -687,17 +688,17 @@ class DequanLiAttractor(Attractor):
 
   npoints = get_npoints(20000)
   params = ["a", "b", "d", "e", "p", "g"]
-  a = get_prop("DequanLi", "a", 40)
-  b = get_prop("DequanLi", "b", 11.0/6.0) 
-  d = get_prop("DequanLi", "d", 0.16)
-  e = get_prop("DequanLi", "e", 0.65)
-  p = get_prop("DequanLi", "p", 55.0)
-  g = get_prop("DequanLi", "g", 20.0)
+  a:  get_prop("DequanLi", "a", 40)
+  b:  get_prop("DequanLi", "b", 11.0/6.0) 
+  d:  get_prop("DequanLi", "d", 0.16)
+  e:  get_prop("DequanLi", "e", 0.65)
+  p:  get_prop("DequanLi", "p", 55.0)
+  g:  get_prop("DequanLi", "g", 20.0)
     
-  x = get_prop("DequanLi", "x", 0.01)
-  y = get_prop("DequanLi", "y", 0.0)
-  z = get_prop("DequanLi", "z", 0.0)
-  dt = get_prop("DequanLi", "dt", 0.0003)
+  x:  get_prop("DequanLi", "x", 0.01)
+  y:  get_prop("DequanLi", "y", 0.0)
+  z:  get_prop("DequanLi", "z", 0.0)
+  dt:  get_prop("DequanLi", "dt", 0.0003)
 
   def iterate(self, x, y, z):
     xn = self.a*(y-x) + self.d*x*z 
@@ -712,14 +713,14 @@ class YuWangAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c", "d"]
-  a = get_prop("YuWang", "a", 10.0)
-  b = get_prop("YuWang", "b", 40.0)
-  c = get_prop("YuWang", "c", 2)
-  d = get_prop("YuWang", "d", 2.5)
-  x = get_prop("YuWang", "x", 0.1)
-  y = get_prop("YuWang", "y", 0.0)
-  z = get_prop("YuWang", "z", 15)
-  dt = get_prop("YuWang", "dt", 0.002)
+  a:  get_prop("YuWang", "a", 10.0)
+  b:  get_prop("YuWang", "b", 40.0)
+  c:  get_prop("YuWang", "c", 2)
+  d:  get_prop("YuWang", "d", 2.5)
+  x:  get_prop("YuWang", "x", 0.1)
+  y:  get_prop("YuWang", "y", 0.0)
+  z:  get_prop("YuWang", "z", 15)
+  dt:  get_prop("YuWang", "dt", 0.002)
 
   def iterate(self, x, y, z):
     xn = self.a*(y-x) 
@@ -734,14 +735,14 @@ class HadleyAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "f", "g"]
-  a = get_prop("Hadley", "a", 0.2)
-  b = get_prop("Hadley", "b", 4)
-  f = get_prop("Hadley", "f", 8)
-  g = get_prop("Hadley", "g", 1)
-  x = get_prop("Hadley", "x", 0.0)
-  y = get_prop("Hadley", "y", 0.0)
-  z = get_prop("Hadley", "z", 1.3)
-  dt = get_prop("Hadley", "dt", 0.008)
+  a:  get_prop("Hadley", "a", 0.2)
+  b:  get_prop("Hadley", "b", 4)
+  f:  get_prop("Hadley", "f", 8)
+  g:  get_prop("Hadley", "g", 1)
+  x:  get_prop("Hadley", "x", 0.0)
+  y:  get_prop("Hadley", "y", 0.0)
+  z:  get_prop("Hadley", "z", 1.3)
+  dt:  get_prop("Hadley", "dt", 0.008)
 
   def iterate(self, x, y, z):
     xn = -y*y-z*z-self.a*x+self.a*self.f
@@ -756,11 +757,11 @@ class HalvorsenAttractor(Attractor):
 
   npoints = get_npoints()
   param = ["a"]
-  a = get_prop("Halvorsen", "a", 1.4)
-  x = get_prop("Halvorsen", "x", -5)
-  y = get_prop("Halvorsen", "y", 0.0)
-  z = get_prop("Halvorsen", "z", 0.0)
-  dt = get_prop("Halvorsen", "dt", 0.004)
+  a:  get_prop("Halvorsen", "a", 1.4)
+  x:  get_prop("Halvorsen", "x", -5)
+  y:  get_prop("Halvorsen", "y", 0.0)
+  z:  get_prop("Halvorsen", "z", 0.0)
+  dt:  get_prop("Halvorsen", "dt", 0.004)
 
   def iterate(self, x, y, z):
     xn = -self.a*x-4*y-4*z-y*y
@@ -775,10 +776,10 @@ class LinzSprottAttractor(Attractor):
 
   npoints = get_npoints()
   param = []
-  x = get_prop("LinzSprott", "x", 0.1)
-  y = get_prop("LinzSprott", "y", 0.1)
-  z = get_prop("LinzSprott", "z", 0.1)
-  dt = get_prop("LinzSprott", "dt", 0.01)
+  x:  get_prop("LinzSprott", "x", 0.1)
+  y:  get_prop("LinzSprott", "y", 0.1)
+  z:  get_prop("LinzSprott", "z", 0.1)
+  dt:  get_prop("LinzSprott", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = y
@@ -793,14 +794,14 @@ class LorenzMod1Attractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c", "d"]
-  a = get_prop("LorenzMod1", "a", 0.1)
-  b = get_prop("LorenzMod1", "b", 4)
-  c = get_prop("LorenzMod1", "c", 14)
-  d = get_prop("LorenzMod1", "d", 0.08)
-  x = get_prop("LorenzMod1", "x", 0.0)
-  y = get_prop("LorenzMod1", "y", 1)
-  z = get_prop("LorenzMod1", "z", 0.0)
-  dt = get_prop("LorenzMod1", "dt", 0.005)
+  a:  get_prop("LorenzMod1", "a", 0.1)
+  b:  get_prop("LorenzMod1", "b", 4)
+  c:  get_prop("LorenzMod1", "c", 14)
+  d:  get_prop("LorenzMod1", "d", 0.08)
+  x:  get_prop("LorenzMod1", "x", 0.0)
+  y:  get_prop("LorenzMod1", "y", 1)
+  z:  get_prop("LorenzMod1", "z", 0.0)
+  dt:  get_prop("LorenzMod1", "dt", 0.005)
 
   def iterate(self, x, y, z):
     xn = -self.a*x+(y*y)-(z*z)+self.a*self.c
@@ -815,14 +816,14 @@ class LorenzMod2Attractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "c", "d"]
-  a = get_prop("LorenzMod2", "a", 0.9)
-  b = get_prop("LorenzMod2", "b", 5)
-  c = get_prop("LorenzMod2", "c", 9.9)
-  d = get_prop("LorenzMod2", "d", 1)
-  x = get_prop("LorenzMod2", "x", 5)
-  y = get_prop("LorenzMod2", "y", 5)
-  z = get_prop("LorenzMod2", "z", 5)
-  dt = get_prop("LorenzMod2", "dt", 0.003)
+  a:  get_prop("LorenzMod2", "a", 0.9)
+  b:  get_prop("LorenzMod2", "b", 5)
+  c:  get_prop("LorenzMod2", "c", 9.9)
+  d:  get_prop("LorenzMod2", "d", 1)
+  x:  get_prop("LorenzMod2", "x", 5)
+  y:  get_prop("LorenzMod2", "y", 5)
+  z:  get_prop("LorenzMod2", "z", 5)
+  dt:  get_prop("LorenzMod2", "dt", 0.003)
 
   def iterate(self, x, y, z):
     xn = -self.a*x+(y*y)-(z*z)+self.a*self.c
@@ -837,12 +838,12 @@ class NewtonLeipnikAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("NewtonLeipnik", "a", 0.4)
-  b = get_prop("NewtonLeipnik", "b", 0.175)
-  x = get_prop("NewtonLeipnik", "x", 0.349)
-  y = get_prop("NewtonLeipnik", "y", 0.0)
-  z = get_prop("NewtonLeipnik", "z", -0.16)
-  dt = get_prop("NewtonLeipnik", "dt", 0.03)
+  a:  get_prop("NewtonLeipnik", "a", 0.4)
+  b:  get_prop("NewtonLeipnik", "b", 0.175)
+  x:  get_prop("NewtonLeipnik", "x", 0.349)
+  y:  get_prop("NewtonLeipnik", "y", 0.0)
+  z:  get_prop("NewtonLeipnik", "z", -0.16)
+  dt:  get_prop("NewtonLeipnik", "dt", 0.03)
 
   def iterate(self, x, y, z):
     xn = -self.a*x+y+10*y*z
@@ -857,11 +858,11 @@ class NoseHooverAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("NoseHoover", "a", 1.5)
-  x = get_prop("NoseHoover", "x", 1)
-  y = get_prop("NoseHoover", "y", 0.0)
-  z = get_prop("NoseHoover", "z", 0.0)
-  dt = get_prop("NoseHoover", "dt", 0.009)
+  a:  get_prop("NoseHoover", "a", 1.5)
+  x:  get_prop("NoseHoover", "x", 1)
+  y:  get_prop("NoseHoover", "y", 0.0)
+  z:  get_prop("NoseHoover", "z", 0.0)
+  dt:  get_prop("NoseHoover", "dt", 0.009)
 
   def iterate(self, x, y, z):
     xn = y
@@ -876,13 +877,13 @@ class RayleighBenardAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "r", "b"]
-  a = get_prop("RayleighBenard", "a", 9)
-  r = get_prop("RayleighBenard", "r", 12)
-  b = get_prop("RayleighBenard", "b", 5)
-  x = get_prop("RayleighBenard", "x", 0.1)
-  y = get_prop("RayleighBenard", "y", 0.0)
-  z = get_prop("RayleighBenard", "z", 0.0)
-  dt = get_prop("RayleighBenard", "dt", 0.05)
+  a:  get_prop("RayleighBenard", "a", 9)
+  r:  get_prop("RayleighBenard", "r", 12)
+  b:  get_prop("RayleighBenard", "b", 5)
+  x:  get_prop("RayleighBenard", "x", 0.1)
+  y:  get_prop("RayleighBenard", "y", 0.0)
+  z:  get_prop("RayleighBenard", "z", 0.0)
+  dt:  get_prop("RayleighBenard", "dt", 0.05)
 
   def iterate(self, x, y, z):
     xn = -self.a*x+self.a*y
@@ -897,12 +898,12 @@ class RucklidgeAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["k", "a"]
-  k = get_prop("Rucklidge", "k", 2)
-  a = get_prop("Rucklidge", "a", 6.7)
-  x = get_prop("Rucklidge", "x", -5)
-  y = get_prop("Rucklidge", "y", 0.0)
-  z = get_prop("Rucklidge", "z", 0.0)
-  dt = get_prop("Rucklidge", "dt", 0.008)
+  k:  get_prop("Rucklidge", "k", 2)
+  a:  get_prop("Rucklidge", "a", 6.7)
+  x:  get_prop("Rucklidge", "x", -5)
+  y:  get_prop("Rucklidge", "y", 0.0)
+  z:  get_prop("Rucklidge", "z", 0.0)
+  dt:  get_prop("Rucklidge", "dt", 0.008)
 
   def iterate(self, x, y, z):
     xn = -self.k*x+self.a*y-y*z
@@ -917,16 +918,16 @@ class WangSunAttractor(Attractor):
 
   npoints = get_npoints(30000)
   params = ["a", "b", "c", "d", "e", "f"]
-  a = get_prop("WangSun", "a", 0.2) 
-  b = get_prop("WangSun", "b", -0.01)
-  c = get_prop("WangSun", "c", 1.0)
-  d = get_prop("WangSun", "d", -0.4)
-  e = get_prop("WangSun", "e", -1.0)
-  f = get_prop("WangSun", "f", -1.0)
-  x = get_prop("WangSun", "x", 0.5)
-  y = get_prop("WangSun", "y", 0.1)
-  z = get_prop("WangSun", "z", 0.1)
-  dt = get_prop("WangSun", "dt", 0.02)
+  a:  get_prop("WangSun", "a", 0.2) 
+  b:  get_prop("WangSun", "b", -0.01)
+  c:  get_prop("WangSun", "c", 1.0)
+  d:  get_prop("WangSun", "d", -0.4)
+  e:  get_prop("WangSun", "e", -1.0)
+  f:  get_prop("WangSun", "f", -1.0)
+  x:  get_prop("WangSun", "x", 0.5)
+  y:  get_prop("WangSun", "y", 0.1)
+  z:  get_prop("WangSun", "z", 0.1)
+  dt:  get_prop("WangSun", "dt", 0.02)
 
   def iterate(self, x, y, z):
     xn = self.a*x + self.c*y*z 
@@ -941,12 +942,12 @@ class NewJerkAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["k", "a"]
-  a = get_prop("NewJerk", "a", 0.00000001)
-  b = get_prop("NewJerk", "b", 0.026)
-  x = get_prop("NewJerk", "x", 0.1)
-  y = get_prop("NewJerk", "y", 0.1)
-  z = get_prop("NewJerk", "z", 0.1)
-  dt = get_prop("NewJerk", "dt", 0.01)
+  a:  get_prop("NewJerk", "a", 0.00000001)
+  b:  get_prop("NewJerk", "b", 0.026)
+  x:  get_prop("NewJerk", "x", 0.1)
+  y:  get_prop("NewJerk", "y", 0.1)
+  z:  get_prop("NewJerk", "z", 0.1)
+  dt:  get_prop("NewJerk", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = y
@@ -961,12 +962,12 @@ class SakaryaAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("Sakarya", "a", 0.4)
-  b = get_prop("Sakarya", "b", 0.3)
-  x = get_prop("Sakarya", "x", 1)
-  y = get_prop("Sakarya", "y", -1)
-  z = get_prop("Sakarya", "z", 1)
-  dt = get_prop("Sakarya", "dt", 0.003)
+  a:  get_prop("Sakarya", "a", 0.4)
+  b:  get_prop("Sakarya", "b", 0.3)
+  x:  get_prop("Sakarya", "x", 1)
+  y:  get_prop("Sakarya", "y", -1)
+  z:  get_prop("Sakarya", "z", 1)
+  dt:  get_prop("Sakarya", "dt", 0.003)
 
   def iterate(self, x, y, z):
     xn = -x+y+(y*z)
@@ -981,20 +982,20 @@ class Duffing(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "w"]
-  a = get_prop("Duffing", "a", 0.25)
-  b = get_prop("Duffing", "b", 0.3)
-  w = get_prop("Duffing", "w", 1.0)
-  x = get_prop("Duffing", "x", 0.1)
-  y = get_prop("Duffing", "y", 0.0)
-  z = get_prop("Duffing", "z", 0.0)
-  dt = get_prop("Duffing", "dt", 0.01)
+  a:  get_prop("Duffing", "a", 0.25)
+  b:  get_prop("Duffing", "b", 0.3)
+  w:  get_prop("Duffing", "w", 1.0)
+  x:  get_prop("Duffing", "x", 0.1)
+  y:  get_prop("Duffing", "y", 0.0)
+  z:  get_prop("Duffing", "z", 0.0)
+  dt:  get_prop("Duffing", "dt", 0.01)
   t = 0.0
 
   def iterate(self, x, y, z):
     xn = y
     yn = x-x**3-self.a*y+self.b*math.cos(self.t*self.w)
     zn = 0
-    t += dt
+    self.t += self.dt
     return xn, yn, zn
 
 class ShimizuMoriokaAttractor(Attractor):
@@ -1004,12 +1005,12 @@ class ShimizuMoriokaAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("ShimizuMorioka", "a", 0.75)
-  b = get_prop("ShimizuMorioka", "b", 0.45)
-  x = get_prop("ShimizuMorioka", "x", 0.1)
-  y = get_prop("ShimizuMorioka", "y", 0.0)
-  z = get_prop("ShimizuMorioka", "z", 0.0)
-  dt = get_prop("ShimizuMorioka", "dt", 0.01)
+  a:  get_prop("ShimizuMorioka", "a", 0.75)
+  b:  get_prop("ShimizuMorioka", "b", 0.45)
+  x:  get_prop("ShimizuMorioka", "x", 0.1)
+  y:  get_prop("ShimizuMorioka", "y", 0.0)
+  z:  get_prop("ShimizuMorioka", "z", 0.0)
+  dt:  get_prop("ShimizuMorioka", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = y
@@ -1024,11 +1025,11 @@ class SprottDAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottD", "a", 3)
-  x = get_prop("SprottD", "x", 0.1)
-  y = get_prop("SprottD", "y", 0.0)
-  z = get_prop("SprottD", "z", 0.0)
-  dt = get_prop("SprottD", "dt", 0.008)
+  a:  get_prop("SprottD", "a", 3)
+  x:  get_prop("SprottD", "x", 0.1)
+  y:  get_prop("SprottD", "y", 0.0)
+  z:  get_prop("SprottD", "z", 0.0)
+  dt:  get_prop("SprottD", "dt", 0.008)
 
   def iterate(self, x, y, z):
     xn = -y
@@ -1043,11 +1044,11 @@ class SprottEAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottE", "a", 4)
-  x = get_prop("SprottE", "x", 1)
-  y = get_prop("SprottE", "y", 0.0)
-  z = get_prop("SprottE", "z", 0.0)
-  dt = get_prop("SprottE", "dt", 0.01)
+  a:  get_prop("SprottE", "a", 4)
+  x:  get_prop("SprottE", "x", 1)
+  y:  get_prop("SprottE", "y", 0.0)
+  z:  get_prop("SprottE", "z", 0.0)
+  dt:  get_prop("SprottE", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = y*z
@@ -1062,10 +1063,10 @@ class SprottLinzBAttractor(Attractor):
 
   npoints = get_npoints()
   param = []
-  x = get_prop("SprottLinzB", "x", 1)
-  y = get_prop("SprottLinzB", "y", 0.0)
-  z = get_prop("SprottLinzB", "z", 1)
-  dt = get_prop("SprottLinzB", "dt", 0.02)
+  x:  get_prop("SprottLinzB", "x", 1)
+  y:  get_prop("SprottLinzB", "y", 0.0)
+  z:  get_prop("SprottLinzB", "z", 1)
+  dt:  get_prop("SprottLinzB", "dt", 0.02)
 
   def iterate(self, x, y, z):
     xn = y*z
@@ -1080,10 +1081,10 @@ class SprottLinzCAttractor(Attractor):
 
   npoints = get_npoints()
   param = []
-  x = get_prop("SprottLinzC", "x", 1)
-  y = get_prop("SprottLinzC", "y", 0.0)
-  z = get_prop("SprottLinzC", "z", 1)
-  dt = get_prop("SprottLinzC", "dt", 0.02)
+  x:  get_prop("SprottLinzC", "x", 1)
+  y:  get_prop("SprottLinzC", "y", 0.0)
+  z:  get_prop("SprottLinzC", "z", 1)
+  dt:  get_prop("SprottLinzC", "dt", 0.02)
 
   def iterate(self, x, y, z):
     xn = y*z
@@ -1098,11 +1099,11 @@ class SprottLinzFAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzF", "a", 0.5)
-  x = get_prop("SprottLinzF", "x", 0.1)
-  y = get_prop("SprottLinzF", "y", 0.0)
-  z = get_prop("SprottLinzF", "z", 0.0)
-  dt = get_prop("SprottLinzF", "dt", 0.01)
+  a:  get_prop("SprottLinzF", "a", 0.5)
+  x:  get_prop("SprottLinzF", "x", 0.1)
+  y:  get_prop("SprottLinzF", "y", 0.0)
+  z:  get_prop("SprottLinzF", "z", 0.0)
+  dt:  get_prop("SprottLinzF", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = y+z
@@ -1117,11 +1118,11 @@ class SprottLinzGAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzG", "a", 0.4)
-  x = get_prop("SprottLinzG", "x", 1)
-  y = get_prop("SprottLinzG", "y", 0.0)
-  z = get_prop("SprottLinzG", "z", 0.0)
-  dt = get_prop("SprottLinzG", "dt", 0.01)
+  a:  get_prop("SprottLinzG", "a", 0.4)
+  x:  get_prop("SprottLinzG", "x", 1)
+  y:  get_prop("SprottLinzG", "y", 0.0)
+  z:  get_prop("SprottLinzG", "z", 0.0)
+  dt:  get_prop("SprottLinzG", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = self.a*x+z
@@ -1136,11 +1137,11 @@ class SprottLinzHAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzH", "a", 0.5)
-  x = get_prop("SprottLinzH", "x", 1)
-  y = get_prop("SprottLinzH", "y", 0.0)
-  z = get_prop("SprottLinzH", "z", 0.0)
-  dt = get_prop("SprottLinzH", "dt", 0.01)
+  a:  get_prop("SprottLinzH", "a", 0.5)
+  x:  get_prop("SprottLinzH", "x", 1)
+  y:  get_prop("SprottLinzH", "y", 0.0)
+  z:  get_prop("SprottLinzH", "z", 0.0)
+  dt:  get_prop("SprottLinzH", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = -y+pow(z,2)
@@ -1155,11 +1156,11 @@ class SprottLinzIAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzI", "a", -0.2)
-  x = get_prop("SprottLinzI", "x", 0.1)
-  y = get_prop("SprottLinzI", "y", 0.1)
-  z = get_prop("SprottLinzI", "z", 0.1)
-  dt = get_prop("SprottLinzI", "dt", 0.01)
+  a:  get_prop("SprottLinzI", "a", -0.2)
+  x:  get_prop("SprottLinzI", "x", 0.1)
+  y:  get_prop("SprottLinzI", "y", 0.1)
+  z:  get_prop("SprottLinzI", "z", 0.1)
+  dt:  get_prop("SprottLinzI", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = self.a*y
@@ -1174,11 +1175,11 @@ class SprottLinzJAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzJ", "a", 2)
-  x = get_prop("SprottLinzJ", "x", 0.1)
-  y = get_prop("SprottLinzJ", "y", 0.1)
-  z = get_prop("SprottLinzJ", "z", 0.1)
-  dt = get_prop("SprottLinzJ", "dt", 0.01)
+  a:  get_prop("SprottLinzJ", "a", 2)
+  x:  get_prop("SprottLinzJ", "x", 0.1)
+  y:  get_prop("SprottLinzJ", "y", 0.1)
+  z:  get_prop("SprottLinzJ", "z", 0.1)
+  dt:  get_prop("SprottLinzJ", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = self.a*z
@@ -1193,11 +1194,11 @@ class SprottLinzKAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzK", "a", 0.3)
-  x = get_prop("SprottLinzK", "x", 0.1)
-  y = get_prop("SprottLinzK", "y", 0.0)
-  z = get_prop("SprottLinzK", "z", 0.0)
-  dt = get_prop("SprottLinzK", "dt", 0.01)
+  a:  get_prop("SprottLinzK", "a", 0.3)
+  x:  get_prop("SprottLinzK", "x", 0.1)
+  y:  get_prop("SprottLinzK", "y", 0.0)
+  z:  get_prop("SprottLinzK", "z", 0.0)
+  dt:  get_prop("SprottLinzK", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = x*y-z
@@ -1212,12 +1213,12 @@ class SprottLinzLAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("SprottLinzL", "a", 3.9)
-  b = get_prop("SprottLinzL", "b", 0.9)
-  x = get_prop("SprottLinzL", "x", 1)
-  y = get_prop("SprottLinzL", "y", 1)
-  z = get_prop("SprottLinzL", "z", 0.0)
-  dt = get_prop("SprottLinzL", "dt", 0.01)
+  a:  get_prop("SprottLinzL", "a", 3.9)
+  b:  get_prop("SprottLinzL", "b", 0.9)
+  x:  get_prop("SprottLinzL", "x", 1)
+  y:  get_prop("SprottLinzL", "y", 1)
+  z:  get_prop("SprottLinzL", "z", 0.0)
+  dt:  get_prop("SprottLinzL", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = y+self.a*z
@@ -1232,11 +1233,11 @@ class SprottLinzMAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzM", "a", 1.7)
-  x = get_prop("SprottLinzM", "x", 0.1)
-  y = get_prop("SprottLinzM", "y", 0.1)
-  z = get_prop("SprottLinzM", "z", 0.1)
-  dt = get_prop("SprottLinzM", "dt", 0.01)
+  a:  get_prop("SprottLinzM", "a", 1.7)
+  x:  get_prop("SprottLinzM", "x", 0.1)
+  y:  get_prop("SprottLinzM", "y", 0.1)
+  z:  get_prop("SprottLinzM", "z", 0.1)
+  dt:  get_prop("SprottLinzM", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = -z
@@ -1251,11 +1252,11 @@ class SprottLinzOAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzO", "a", 2.7)
-  x = get_prop("SprottLinzO", "x", 0.1)
-  y = get_prop("SprottLinzO", "y", 0.1)
-  z = get_prop("SprottLinzO", "z", 0.1)
-  dt = get_prop("SprottLinzO", "dt", 0.008)
+  a:  get_prop("SprottLinzO", "a", 2.7)
+  x:  get_prop("SprottLinzO", "x", 0.1)
+  y:  get_prop("SprottLinzO", "y", 0.1)
+  z:  get_prop("SprottLinzO", "z", 0.1)
+  dt:  get_prop("SprottLinzO", "dt", 0.008)
 
   def iterate(self, x, y, z):
     xn = y
@@ -1270,11 +1271,11 @@ class SprottLinzPAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzP", "a", 2.7)
-  x = get_prop("SprottLinzP", "x", 0.1)
-  y = get_prop("SprottLinzP", "y", 0.0)
-  z = get_prop("SprottLinzP", "z", 0.0)
-  dt = get_prop("SprottLinzP", "dt", 0.01)
+  a:  get_prop("SprottLinzP", "a", 2.7)
+  x:  get_prop("SprottLinzP", "x", 0.1)
+  y:  get_prop("SprottLinzP", "y", 0.0)
+  z:  get_prop("SprottLinzP", "z", 0.0)
+  dt:  get_prop("SprottLinzP", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = self.a*y+z
@@ -1289,12 +1290,12 @@ class SprottLinzQAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("SprottLinzQ", "a", 3.1)
-  b = get_prop("SprottLinzQ", "b", 0.5)
-  x = get_prop("SprottLinzQ", "x", 0.1)
-  y = get_prop("SprottLinzQ", "y", 0.1)
-  z = get_prop("SprottLinzQ", "z", 0.1)
-  dt = get_prop("SprottLinzQ", "dt", 0.004)
+  a:  get_prop("SprottLinzQ", "a", 3.1)
+  b:  get_prop("SprottLinzQ", "b", 0.5)
+  x:  get_prop("SprottLinzQ", "x", 0.1)
+  y:  get_prop("SprottLinzQ", "y", 0.1)
+  z:  get_prop("SprottLinzQ", "z", 0.1)
+  dt:  get_prop("SprottLinzQ", "dt", 0.004)
 
   def iterate(self, x, y, z):
     xn = -z
@@ -1309,11 +1310,11 @@ class SprottLinzSAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottLinzS", "a", 4)
-  x = get_prop("SprottLinzS", "x", 0.1)
-  y = get_prop("SprottLinzS", "y", 0.1)
-  z = get_prop("SprottLinzS", "z", 0.1)
-  dt = get_prop("SprottLinzS", "dt", 0.004)
+  a:  get_prop("SprottLinzS", "a", 4)
+  x:  get_prop("SprottLinzS", "x", 0.1)
+  y:  get_prop("SprottLinzS", "y", 0.1)
+  z:  get_prop("SprottLinzS", "z", 0.1)
+  dt:  get_prop("SprottLinzS", "dt", 0.004)
 
   def iterate(self, x, y, z):
     xn = -x-self.a*y
@@ -1328,11 +1329,11 @@ class SprottNAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a"]
-  a = get_prop("SprottN", "a", 2)
-  x = get_prop("SprottN", "x", 0.1)
-  y = get_prop("SprottN", "y", 0.0)
-  z = get_prop("SprottN", "z", 0.0)
-  dt = get_prop("SprottN", "dt", 0.01)
+  a:  get_prop("SprottN", "a", 2)
+  x:  get_prop("SprottN", "x", 0.1)
+  y:  get_prop("SprottN", "y", 0.0)
+  z:  get_prop("SprottN", "z", 0.0)
+  dt:  get_prop("SprottN", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = -self.a*y
@@ -1347,12 +1348,12 @@ class SprottRAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b"]
-  a = get_prop("SprottR", "a", 0.9)
-  b = get_prop("SprottR", "b", 0.4)
-  x = get_prop("SprottR", "x", 0.1)
-  y = get_prop("SprottR", "y", 0.0)
-  z = get_prop("SprottR", "z", 0.0)
-  dt = get_prop("SprottR", "dt", 0.01)
+  a:  get_prop("SprottR", "a", 0.9)
+  b:  get_prop("SprottR", "b", 0.4)
+  x:  get_prop("SprottR", "x", 0.1)
+  y:  get_prop("SprottR", "y", 0.0)
+  z:  get_prop("SprottR", "z", 0.0)
+  dt:  get_prop("SprottR", "dt", 0.01)
 
   def iterate(self, x, y, z):
     xn = self.a-y
@@ -1367,19 +1368,19 @@ class StrizhakKawczynskiAttractor(Attractor):
 
   npoints = get_npoints()
   params = ["a", "b", "b1", "b2", "q", "r", "ax1", "ax2", "ax3"]
-  a = get_prop("StrizhakKawczynski", "a", 150)
-  b = get_prop("StrizhakKawczynski", "b", 436.6)
-  b1 = get_prop("StrizhakKawczynski", "b1", 3.714)
-  b2 = get_prop("StrizhakKawczynski", "b2", 21.7)
-  q = get_prop("StrizhakKawczynski", "q", 0.07)
-  r = get_prop("StrizhakKawczynski", "r", 0.101115)
-  ax1 = get_prop("StrizhakKawczynski", "ax1", 10)
-  ax2 = get_prop("StrizhakKawczynski", "ax2", 11)
-  ax3 = get_prop("StrizhakKawczynski", "ax3", 20)
-  x = get_prop("StrizhakKawczynski", "x", 0.1)
-  y = get_prop("StrizhakKawczynski", "y", 0.0)
-  z = get_prop("StrizhakKawczynski", "z", 0.0)
-  dt = get_prop("StrizhakKawczynski", "dt", 0.08)
+  a: get_prop("StrizhakKawczynski", "a", 150)
+  b: get_prop("StrizhakKawczynski", "b", 436.6)
+  b1: get_prop("StrizhakKawczynski", "b1", 3.714)
+  b2: get_prop("StrizhakKawczynski", "b2", 21.7)
+  q: get_prop("StrizhakKawczynski", "q", 0.07)
+  r: get_prop("StrizhakKawczynski", "r", 0.101115)
+  ax1: get_prop("StrizhakKawczynski", "ax1", 10)
+  ax2: get_prop("StrizhakKawczynski", "ax2", 11)
+  ax3: get_prop("StrizhakKawczynski", "ax3", 20)
+  x: get_prop("StrizhakKawczynski", "x", 0.1)
+  y: get_prop("StrizhakKawczynski", "y", 0.0)
+  z: get_prop("StrizhakKawczynski", "z", 0.0)
+  dt: get_prop("StrizhakKawczynski", "dt", 0.08)
 
   def iterate(self, x, y, z):
     xn = self.r*(y-(x-self.ax1)*(x-self.ax2)*(x-self.ax3)-self.a)
@@ -1392,13 +1393,13 @@ class ThomasAttractor(Attractor):
   bl_label = "Thomas"
   bl_options = {"REGISTER", "UNDO"}
 
-  npoints = get_npoints()
-  params = ["b"]
-  b = get_prop("Thomas", "b", 0.19)
-  x = get_prop("Thomas", "x", 0.1)
-  y = get_prop("Thomas", "y", 0.0)
-  z = get_prop("Thomas", "z", 0.0)
-  dt = get_prop("Thomas", "dt", 0.05)
+  npoints: get_npoints()
+  params: ["b"]
+  b: get_prop("Thomas", "b", 0.19)
+  x: get_prop("Thomas", "x", 0.1)
+  y: get_prop("Thomas", "y", 0.0)
+  z: get_prop("Thomas", "z", 0.0)
+  dt: get_prop("Thomas", "dt", 0.05)
 
   def iterate(self, x, y, z):
     xn = -self.b*x+math.sin(y)
@@ -1476,13 +1477,83 @@ class INFO_MT_curve_attractor_add(bpy.types.Menu):
 def menu_func(self, context):
   self.layout.menu("INFO_MT_curve_attractor_add", icon="PLUGIN")
 
+
+classes = (
+    CoulletAttractor,
+    LorenzAttractor,
+    RoesslerAttractor,
+    AizawaAttractor,
+    ActAttractor,
+    ThreeCellsCNNAttractor,
+    ArneodoAttractor,
+    AnishenkoAstakhovAttractor,
+    BoualiAttractor,
+    BurkeShawAttractor,
+    ChenAttractor,
+    LotkaVolterraAttractor,
+    MooreSpiegelAttractor,
+    RikitakeAttractor,
+    RabinovichFabrikantAttractor,
+    ThreeLayerAttractor,
+    ChuaAttractor,
+    ChuaMultiIAttractor,
+    ChuaMultiIIAttractor,
+    ChenLeeAttractor,
+    FinanceAttractor,
+    ChenCelikovskyAttractor,
+    DadrasAttractor,
+    DequanLiAttractor,
+    YuWangAttractor,
+    HadleyAttractor,
+    HalvorsenAttractor,
+    LinzSprottAttractor,
+    LorenzMod1Attractor,
+    LorenzMod2Attractor,
+    NewtonLeipnikAttractor,
+    NoseHooverAttractor,
+    RayleighBenardAttractor,
+    RucklidgeAttractor,
+    WangSunAttractor,
+    NewJerkAttractor,
+    SakaryaAttractor,
+    Duffing,
+    ShimizuMoriokaAttractor,
+    SprottDAttractor,
+    SprottEAttractor,
+    SprottLinzBAttractor,
+    SprottLinzCAttractor,
+    SprottLinzFAttractor,
+    SprottLinzGAttractor,
+    SprottLinzHAttractor,
+    SprottLinzIAttractor,
+    SprottLinzJAttractor,
+    SprottLinzKAttractor,
+    SprottLinzLAttractor,
+    SprottLinzMAttractor,
+    SprottLinzOAttractor,
+    SprottLinzPAttractor,
+    SprottLinzQAttractor,
+    SprottLinzSAttractor,
+    SprottNAttractor,
+    SprottRAttractor,
+    StrizhakKawczynskiAttractor,
+    ThomasAttractor,
+    INFO_MT_curve_attractor_add,
+)
+
+
+
 def register():
-  bpy.utils.register_module(__name__)
-  bpy.types.INFO_MT_curve_add.append(menu_func)
+    from bpy.utils import register_class
+    for cls in classes:
+        register_class(cls)
+    bpy.types.VIEW3D_MT_curve_add.append(menu_func)
 
 def unregister():
-  bpy.utils.unregister_module(__name__)
-  bpy.types.INFO_MT_curve_add.remove(menu_func)
+    from bpy.utils import unregister_class
+    for cls in reversed(classes):
+        unregister_class(cls)
+    bpy.types.VIEW3D_MT_curve_add.remove(menu_func)
 
 if __name__ == "__main__":
   register()
